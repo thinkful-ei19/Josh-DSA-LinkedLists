@@ -240,14 +240,104 @@ function findLast(list){
   return currNode.value;
 }
 
+//Mystery Program
+
+function WhatDoesThisProgramDo(lst){
+  let current = lst.head;
+  while(current !== null){
+    let newNode = current;
+    while (newNode.next !== null) {
+      if (newNode.next.value === current.value) {
+        newNode.next = newNode.next.next;
+      }
+      else{
+        newNode = newNode.next;
+      }
+    }
+    current = current.next;
+  }
+}
+  
+//This function checks if the values of the first and second node are equal, in which case it sets the first node to the second and the second to the third. Otherwise, it sets the value of the first node to the second node and overwrites the rest of the list values.  
+//The run time complexity of the function is O(n^2)-Polynomial Time, due to the nested while loops. 
+  
+//Reverse List
+  
+function reverseList(list){
+  if(!list.head){
+    return;
+  }
+  let currNode = list.head;
+  let nextNode = null;
+  let prevNode = null;
+
+  while(currNode !== null){
+    nextNode = currNode.next;
+    currNode.next = prevNode;
+    prevNode = currNode;
+    currNode = nextNode;    
+  }
+
+  list.head = prevNode;
+  console.log(JSON.stringify(list));
+  return list;
+}
+
+//Third from the end
+
+function thirdFromEnd(list){
+  if(!list.head){
+    return;
+  }
+
+  let currNode = list.head;
+  while(currNode.next.next.next !== null){
+    currNode = currNode.next;
+  }
+  console.log(currNode);
+  return currNode;
+}
+
+//Middle of a list
+
+function middleOfList(list){
+  /* let counter = 0;
+  let currNode = list.head;
+  while (currNode !== null) {
+    currNode = currNode.next;
+    counter++;
+  }
+  let middle = Math.floor(counter/2);
+  let counterTwo = 0;
+  currNode = list.head;
+  while ( counterTwo !== middle) {
+    currNode = currNode.next;
+    counterTwo++;
+  }
+  console.log(currNode.value);
+  return currNode;*/  
+  if(!list.head){
+    return;
+  }
+
+  let fast = list.head;
+  let slow = list.head;
+
+  while((fast !== null) && (fast.next !== null)){
+    fast = fast.next.next;
+    slow = slow.next;
+  }
+
+  console.log(slow.value);
+  return slow.value;
+}
+
 main();
-
-display(SLL);
-
-size(SLL);
-
-isEmpty(SLL);
-
-findPrevious(SLL, 'Boomer');
-
-findLast(SLL);
+//display(SLL);
+//size(SLL);
+//isEmpty(SLL);
+//findPrevious(SLL, 'Boomer');
+//findLast(SLL);
+//reverseList(SLL);
+//thirdFromEnd(SLL);
+//middleOfList(SLL);
