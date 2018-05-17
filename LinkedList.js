@@ -1,5 +1,12 @@
 'use strict';
-const _Node = require('./node').default;
+
+
+class _Node {
+  constructor(value, next){
+    this.value = value;
+    this.next = next;
+  }
+}
 
 class LinkedList {
   constructor(){
@@ -69,10 +76,45 @@ class LinkedList {
     }
     previousNode.next = currNode.next;
   }
+
+  insertBefore(nextNode, item){
+    if(this.head === null){
+      this.insertFirst(item);
+    }
+    else {
+      let currNode = this.head;
+      let prevNode = this.head;
+
+      while((currNode !== null) && (currNode.value !== nextNode)){
+        prevNode = currNode;
+        currNode = currNode.next;
+      }
+      if(currNode === null){
+        console.log('Item not found on list');
+        return;
+      }
+      prevNode.next = new _Node(item, currNode);
+
+    }
+  }
 }
 
 function main(){
   let list = new LinkedList();   
 
-  
+  list.insertFirst('Apollo');
+  list.insertLast('Boomer');
+  list.insertLast('Helo');
+  list.insertLast('Husker');
+  list.insertLast('Starbuck');
+
+  list.insertFirst('Tauhida');
+
+  list.remove('Starbuck');
+
+  list.insertBefore('Apollo', 'John');
+
+  console.log(JSON.stringify(list));
 }
+
+main();
